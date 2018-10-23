@@ -23,7 +23,7 @@
 */
 const int BLINK_LED = 10;
 void setup() {
-  pinMode(BLINK_LED, OUTPUT);
+  pinMode(BLINK_LED, OUTPUT);  // Our LED pin is output
 }
 void loop() {
   digitalWrite(BLINK_LED, HIGH);
