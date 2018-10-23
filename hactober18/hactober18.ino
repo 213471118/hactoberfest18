@@ -22,12 +22,48 @@
   http://www.arduino.cc/en/Tutorial/Blink
 */
 const int BLINK_LED = 10;
+
+const int FADE_AMOUNT = 5;
+int brightness = 0;
+int direction = 1; 
+
+void increaseBrightness() {
+  brightness += FADE_AMOUNT;
+
+  if (brightness > 255) {
+    brightness = 255;
+  }
+  analogWrite(BLINK_LED, brightness);
+}
+
+void decreaseBrightness() {
+  brightness -= FADE_AMOUNT;
+
+  if (brightness < 0) {
+    brightness = 0;
+  }
+  analogWrite (BLINK_LED, brightness);
+  
+}
+
 void setup() {
   pinMode(BLINK_LED, OUTPUT);  // Our LED pin is output
 }
 void loop() {
-  digitalWrite(BLINK_LED, HIGH);
-  delay(1000);
-  digitalWrite(BLINK_LED, LOW);
-  delay(1000);
+  if (direction == 1 && brightness >= 255) {
+    direction = 0;
+  }
+  else if (direction == 0 && brightness <= 0) {
+    direction = 1;
+  }
+  
+  if (direction == 1) {
+    increaseBrightness();
+  }
+  
+  else {
+    decreaseBrightness();
+  }
+  
+  delay(30);
 }
